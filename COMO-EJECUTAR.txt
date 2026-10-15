@@ -1,0 +1,222 @@
+LABORATORIO II — CÓMO EJECUTAR EL PROYECTO
+Guía rápida para estudiantes y docente
+
+¿QUÉ SIGNIFICA EJECUTAR O HACER RUN?
+Significa iniciar el programa Java. Spring Boot pone en marcha un servidor
+web que recibe las peticiones del navegador. Mientras usás la página,
+el programa Java debe seguir encendido.
+
+1. ABRIR LA CARPETA CORRECTA
+En Visual Studio Code: Archivo / File → Abrir carpeta / Open Folder.
+Abrí la carpeta del proyecto: la que contiene pom.xml, mvnw, mvnw.cmd y src.
+No abras solamente index.html ni una carpeta que contenga varios proyectos.
+Si VS Code pregunta si confiás en los archivos, verificá que sean los del
+proyecto compartido por la docente antes de habilitar su ejecución.
+
+2. ABRIR UNA TERMINAL
+En el menú superior: Terminal → Nueva terminal / New Terminal.
+La terminal es el panel donde escribís los comandos; Enter los ejecuta.
+Debe estar ubicada en la carpeta que contiene pom.xml.
+Para ver sus archivos, escribí dir en Windows o ls en macOS/Linux.
+
+3. COMPROBAR JAVA
+Ejecutá estos comandos por separado:
+
+java -version
+javac -version
+
+Los dos deben indicar versión 21. JDK incluye Java y el compilador javac.
+Si no encuentra los comandos, falta instalar o configurar el JDK.
+La extensión de Java de VS Code no reemplaza esta comprobación.
+Después de cambiar la configuración, cerrá la terminal y abrí una nueva.
+
+4. INICIAR LA APLICACIÓN
+Elegí UN comando según tu sistema. Ejecutalo desde la carpeta del proyecto.
+
+WINDOWS (PowerShell o CMD):
+.\mvnw.cmd spring-boot:run
+
+MAC O LINUX:
+./mvnw spring-boot:run
+
+¿Qué hace este comando?
+- mvnw / mvnw.cmd: ejecuta Maven mediante el Wrapper incluido.
+- Maven lee pom.xml, obtiene las dependencias y compila el proyecto.
+- spring-boot:run: inicia la aplicación Spring Boot.
+No hace falta instalar Maven o Spring Boot por separado.
+La primera ejecución necesita internet y puede tardar varios minutos.
+No cierres la terminal mientras descarga ni ejecutes varias copias a la vez.
+
+5. RECONOCER QUE ARRANCÓ
+Buscá mensajes parecidos a:
+
+Tomcat started on port 8080
+Started ProductoApplication
+
+La terminal queda ocupada porque el servidor sigue funcionando. Es normal.
+Si aparece BUILD FAILURE o APPLICATION FAILED TO START, hay un error:
+leé las últimas líneas antes de intentar abrir la página.
+
+6. ABRIR LA PÁGINA
+En el navegador escribí:
+
+http://localhost:8080/
+
+localhost = tu propia computadora.
+8080 = puerto en el que escucha esta aplicación.
+
+No uses Live Server ni abras index.html con doble clic.
+La página y la API se sirven desde el mismo programa Java.
+
+7. HACER LA PRIMERA PRUEBA
+- Pulsá Consultar productos: debe mostrar Cuaderno y Lapicera (GET, 200).
+- Escribí un nombre y un precio positivo; pulsá Enviar producto (POST, 201).
+- Observá el JSON enviado y la respuesta del servidor.
+- Pulsá Consultar productos otra vez para actualizar la tabla.
+- Probá un precio negativo: debe responder 400 y no guardar el producto.
+
+También podés abrir directamente:
+http://localhost:8080/api/productos
+Eso permite ver el JSON del GET. Escribir una dirección en la barra del
+navegador no envía el POST con los datos del formulario.
+
+8. DETENER Y VOLVER A INICIAR
+Para detener: hacé clic en la terminal donde corre Java y presioná Ctrl+C.
+En Mac también es Control+C, no Command+C.
+Si Windows pregunta si deseás terminar el trabajo, confirmá la finalización.
+Para iniciar otra vez: ejecutá el mismo comando del paso 4.
+
+Después de modificar Java: detener, iniciar otra vez y probar.
+Después de modificar HTML o JavaScript: para este ejercicio, detener,
+iniciar otra vez y recargar la página para ver la versión actualizada.
+Al reiniciar se pierden los productos agregados: la lista está en memoria.
+
+ALTERNATIVA EN VS CODE: BOTÓN RUN
+Con Extension Pack for Java instalado y el proyecto Java cargado:
+1. Abrí src/main/java/ar/edu/laboratorio/productos/ProductoApplication.java.
+2. Buscá el método public static void main(String[] args).
+3. Si aparece Run / Ejecutar encima del método, podés usarlo.
+4. Esperá los mensajes de inicio y abrí la misma dirección del paso 6.
+Para detener esta ejecución usá el botón Stop de VS Code.
+Elegí esta alternativa O la terminal: no inicies ambas simultáneamente.
+Para la primera clase recomendamos la terminal, porque todos pueden seguir
+el mismo procedimiento y leer los mensajes.
+
+SI ALGO FALLA
+- No encuentra pom.xml: estás en la carpeta equivocada.
+- Java no encontrado: revisar JDK 21 y PATH/JAVA_HOME.
+- Permission denied con mvnw en Mac/Linux: ejecutar chmod +x mvnw.
+- No descarga dependencias: revisar conexión a internet y el error de Maven.
+- Port 8080 was already in use: otra aplicación usa ese puerto.
+  Detené tu ejecución anterior. No cierres procesos desconocidos.
+  Como alternativa, cambiá server.port=8080 por server.port=8081 en
+  src/main/resources/application.properties; reiniciá y abrí
+  http://localhost:8081/.
+- El navegador dice que no puede conectarse: comprobar que Java arrancó,
+  que sigue funcionando y que la dirección usa el puerto correcto.
+
+====================================================================
+ANEXO OPCIONAL — PROBAR LA API CON POSTMAN
+====================================================================
+Podés hacer las mismas pruebas desde la página o desde Postman.
+Postman ocupa el lugar del formulario: envía peticiones al mismo backend.
+No es obligatorio instalarlo para realizar el trabajo.
+
+ANTES DE EMPEZAR
+- Usá la aplicación de escritorio de Postman para estas instrucciones.
+- Dejá el proyecto Java ejecutándose en el puerto 8080.
+- La dirección de la API es http://localhost:8080/api/productos.
+- No se necesita autenticación para este proyecto.
+
+OPCIÓN A — CONFIGURAR LAS PETICIONES A MANO
+
+GET: consultar
+1. Creá una petición HTTP nueva en Postman.
+2. Seleccioná GET.
+3. Pegá http://localhost:8080/api/productos en la dirección.
+4. Dejá Body sin contenido y pulsá Send.
+5. Observá el estado 200 OK y la lista JSON en la respuesta.
+
+POST: agregar
+1. Creá otra petición HTTP y seleccioná POST.
+2. Usá la misma dirección: http://localhost:8080/api/productos.
+3. Seleccioná Body → raw → JSON.
+4. Escribí:
+
+{
+  "nombre": "Carpeta",
+  "precio": 1500
+}
+
+5. Pulsá Send.
+6. Observá 201 Created y el producto con su ID asignado por Java.
+7. Volvé al GET y pulsá Send: debe aparecer el nuevo producto.
+
+Al seleccionar JSON, Postman configura Content-Type: application/json.
+No envíes el ID: lo asigna el servidor.
+
+OPCIÓN B — IMPORTAR LOS COMANDOS CURL YA PREPARADOS
+Un comando cURL describe una petición HTTP. Postman puede importarlo
+para completar automáticamente el método, la dirección y los datos.
+
+1. Copiá UNA línea completa que empiece con curl, de los ejemplos siguientes.
+2. En Postman, pulsá Import.
+3. Pegala en el campo para cURL o texto (según la versión puede decir
+   Paste cURL o Raw text) y completá la importación si lo solicita.
+4. Revisá la petición y pulsá Send.
+5. Repetí con los demás ejemplos, uno por vez.
+
+Estos comandos están preparados para importar en Postman en Windows,
+Mac o Linux. También se pueden ejecutar tal cual en una terminal de
+Mac/Linux con curl instalado. Para Windows, usá la importación en Postman:
+las comillas pueden interpretarse de otra forma en CMD o PowerShell.
+
+1) GET — Consultar productos. Esperado: 200 OK.
+
+curl --request GET 'http://localhost:8080/api/productos'
+
+2) POST — Agregar un producto. Esperado: 201 Created.
+
+curl --request POST 'http://localhost:8080/api/productos' --header 'Content-Type: application/json' --data-raw '{"nombre":"Carpeta","precio":1500}'
+
+3) GET — Volvé a enviar el ejemplo 1. La lista debe tener un producto más.
+
+4) POST — Precio negativo. Esperado: 400 Bad Request.
+
+curl --request POST 'http://localhost:8080/api/productos' --header 'Content-Type: application/json' --data-raw '{"nombre":"Carpeta","precio":-10}'
+
+Respuesta esperada:
+{"error":"El precio debe ser mayor que cero."}
+
+5) POST — Nombre vacío. Esperado: 400 Bad Request.
+
+curl --request POST 'http://localhost:8080/api/productos' --header 'Content-Type: application/json' --data-raw '{"nombre":"","precio":1500}'
+
+Respuesta esperada:
+{"error":"El nombre es obligatorio."}
+
+6) GET — Volvé a enviar el ejemplo 1. Los productos rechazados no deben
+aparecer en la lista.
+
+QUÉ OBSERVAR
+- Arriba: método, dirección y Body que enviás.
+- En la respuesta: estado HTTP y JSON que devuelve Java.
+- Cada envío de un POST válido crea otro producto, aunque repitas los datos.
+- Los ejemplos son para el proyecto base, antes de agregar stock.
+  Cuando implementes stock, incluilo también en los POST válidos.
+- Si agregás un producto en Postman y luego consultás desde la página,
+  vas a ver el mismo producto: ambos clientes usan el mismo servidor.
+- Al reiniciar Java, la lista vuelve a sus dos productos iniciales.
+
+SI NO FUNCIONA
+- Sin conexión: comprobá que Java siga ejecutándose y que uses su puerto.
+- 404: revisá la dirección; debe terminar en /api/productos.
+- 405: revisá el método seleccionado.
+- 415: revisá Body → raw → JSON y Content-Type: application/json.
+- 400: revisá el mensaje, los datos y que el JSON tenga comillas dobles
+  y no tenga una coma después del último campo.
+
+Si tenés dudas, consultá a la docente y mostrale la petición y la respuesta.
+
+Documentación oficial para importar cURL:
+https://learning.postman.com/docs/getting-started/importing-and-exporting/importing-data

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Laboratorio II - Productos</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <h1>Laboratorio II - Productos</h1>
+    <p>Una página para consultar y agregar productos.</p>
+
+    <h2>1. Consultar productos - GET</h2>
+    <p>Solicita la lista al servidor. Esta petición no lleva un cuerpo JSON.</p>
+    <button id="consultar">Consultar productos</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody id="productos">
+            <!-- JavaScript agrega aquí las filas recibidas del servidor. -->
+        </tbody>
+    </table>
+
+    <h2>2. Agregar un producto - POST</h2>
+    <p>Completá el nombre y el precio.</p>
+    <p>Para probar un error 400, enviá el nombre vacío o un precio negativo.</p>
+
+    <!-- novalidate permite enviar datos inválidos para probar el backend. -->
+    <form id="formulario" novalidate>
+        <label for="nombre">Nombre:</label>
+        <input id="nombre" type="text">
+
+        <label for="precio">Precio:</label>
+        <input id="precio" type="number" step="any">
+
+        <button type="submit">Enviar producto</button>
+    </form>
+
+    <h2>3. Observar la comunicación</h2>
+    <div aria-live="polite">
+        <p id="estado">Todavía no se envió ninguna petición.</p>
+
+        <h3>Petición</h3>
+        <pre id="peticion">—</pre>
+
+        <h3>Cuerpo enviado</h3>
+        <pre id="enviado">—</pre>
+
+        <h3>Respuesta del servidor</h3>
+        <pre id="respuesta">—</pre>
+    </div>
+
+    <p>Después de agregar un producto, usá GET para actualizar la tabla.</p>
+    <p>Los datos se guardan en memoria. Al reiniciar el servidor vuelven los dos productos iniciales.</p>
+
+    <script src="app.js"></script>
+</body>
+</html>
