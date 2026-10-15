@@ -15,7 +15,14 @@ Consulten a la docente. También pueden usar documentación o un chat como apoyo
 4. Después continúen con la lectura del código y la modificación solicitada.
 
 ## 1. Obtener el proyecto con Git
-La docente compartirá la URL del repositorio. En VS Code, usen **Git: Clone** desde la paleta de comandos y peguen esa URL, o ejecuten `git clone URL_DEL_REPOSITORIO` reemplazando el texto por la dirección real. Abran la carpeta que contiene `pom.xml`.
+Repositorio de la actividad: https://github.com/Silmorato/laboratorio-ii-productos
+
+En VS Code, usen **Git: Clone** desde la paleta de comandos y peguen esa URL, o ejecuten:
+
+```sh
+git clone https://github.com/Silmorato/laboratorio-ii-productos.git
+```
+ Abran la carpeta que contiene `pom.xml`.
 
 Git registra versiones localmente. GitHub aloja repositorios y permite compartirlos. Un commit guarda una versión local; un push la envía al remoto. Clonar no les da permiso de escritura sobre el repositorio de la docente. Para entregar, usen un fork del grupo si está habilitado, o un repositorio propio siguiendo las indicaciones de clase. Todos deben poder explicar sus aportes.
 

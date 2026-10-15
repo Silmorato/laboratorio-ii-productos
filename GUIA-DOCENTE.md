@@ -12,7 +12,7 @@ Reservar tiempo en la segunda clase para entrega y exposiciones. Multiplicar can
 
 El precio usa Double por simplicidad didáctica; en una aplicación monetaria real se suele usar BigDecimal. La lista en memoria y la lógica dentro del controller también son simplificaciones explícitas. No hace falta introducir base de datos, autenticación ni capas adicionales para este integrador.
 
-Antes de compartir: publicar el proyecto en el repositorio docente y dar su URL. No hay URL ficticia configurada ni publicación automática. La consigna stock está pendiente deliberadamente: es el trabajo de los estudiantes.
+Repositorio público de la actividad: https://github.com/Silmorato/laboratorio-ii-productos. Compartir esa URL con los grupos. La consigna stock está pendiente deliberadamente: es el trabajo de los estudiantes.
 
 
 La lectura guiada del README explicita los elementos que deben investigar. Se retiraron el test generado y su dependencia para reducir el material. Se simplificó la validación del precio a dato obligatorio y mayor que cero; no se estudian valores numéricos especiales. El 201 significa Creado; 200 significa OK. El constructor carga los ejemplos al iniciar, y el método POST agrega los nuevos productos al recibir peticiones.
