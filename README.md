@@ -1,9 +1,11 @@
 # Laboratorio II — Integrador: API de productos
 
+**Rama de solución docente:** el stock ya está implementado. El proyecto base para los estudiantes se conserva en `main`. Ver [SOLUCION-DOCENTE.md](SOLUCION-DOCENTE.md) para los cambios y ejemplos.
+
 Este trabajo evaluado comienza en una clase, continúa en la siguiente y finaliza con una exposición en grupos de 2 o 3 integrantes. Avancen por etapas: no es obligatorio terminar una etapa en un día determinado. Los contenidos forman parte de la preparación para el examen.
 
 ## Objetivo
-Ejecutar una aplicación, comprender cómo viajan los datos entre una página y Java, modificarla y explicar el resultado. El proyecto base ya funciona. La modificación evaluada NO está resuelta.
+Ejecutar una aplicación, comprender cómo viajan los datos entre una página y Java, modificarla y explicar el resultado. El proyecto base ya funciona. La consigna original se conserva debajo como referencia; en esta rama ya está resuelta.
 
 ## Si tienen dudas
 Consulten a la docente. También pueden usar documentación o un chat como apoyo, pero deben probar lo que les sugiera y poder explicarlo con sus palabras. Si algo falla, muestren qué estaban haciendo y el mensaje que apareció.

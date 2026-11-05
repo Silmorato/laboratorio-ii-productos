@@ -24,7 +24,7 @@ async function enviar(metodo, producto = null) {
             tabla.replaceChildren();
             datos.forEach(producto => {
                 const fila = document.createElement('tr');
-                [producto.id, producto.nombre, producto.precio].forEach(valor => {
+                [producto.id, producto.nombre, producto.precio, producto.stock].forEach(valor => {
                     const celda = document.createElement('td');
                     celda.textContent = valor;
                     fila.appendChild(celda);
@@ -44,9 +44,12 @@ document.getElementById('consultar').addEventListener('click', () => enviar('GET
 document.getElementById('formulario').addEventListener('submit', evento => {
     evento.preventDefault();
     const valorPrecio = document.getElementById('precio').value;
+    const valorStock = document.getElementById('stock').value;
     const producto = {
         nombre: document.getElementById('nombre').value,
-        precio: valorPrecio === '' ? null : Number(valorPrecio)
+        precio: valorPrecio === '' ? null : Number(valorPrecio),
+        // Un campo vacío se envía como null para que Java pueda rechazarlo.
+        stock: valorStock === '' ? null : Number(valorStock)
     };
     enviar('POST', producto);
 });

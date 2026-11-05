@@ -16,8 +16,8 @@ public class ProductoController {
 
     // Spring crea este controller al iniciar: cargamos dos ejemplos una sola vez.
     public ProductoController() {
-        productos.add(new Producto(1L, "Cuaderno", 2500.0));
-        productos.add(new Producto(2L, "Lapicera", 800.0));
+        productos.add(new Producto(1L, "Cuaderno", 2500.0, 10));
+        productos.add(new Producto(2L, "Lapicera", 800.0, 0));
     }
 
     // Atiende GET /api/productos: consultar sin agregar productos.
@@ -37,6 +37,10 @@ public class ProductoController {
         }
         if (producto.getPrecio() == null || producto.getPrecio() <= 0) {
             return ResponseEntity.badRequest().body(Map.of("error", "El precio debe ser mayor que cero."));
+        }
+        // Cero es válido: el producto existe, pero no hay unidades disponibles.
+        if (producto.getStock() == null || producto.getStock() < 0) {
+            return ResponseEntity.badRequest().body(Map.of("error", "El stock es obligatorio y no puede ser negativo."));
         }
         producto.setId(siguienteId++); // El servidor asigna el identificador.
         producto.setNombre(producto.getNombre().trim());

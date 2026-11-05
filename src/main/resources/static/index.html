@@ -20,6 +20,7 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Precio</th>
+                <th>Stock</th>
             </tr>
         </thead>
         <tbody id="productos">
@@ -28,8 +29,8 @@
     </table>
 
     <h2>2. Agregar un producto - POST</h2>
-    <p>Completá el nombre y el precio.</p>
-    <p>Para probar un error 400, enviá el nombre vacío o un precio negativo.</p>
+    <p>Completá el nombre, el precio y el stock.</p>
+    <p>Para probar un error 400, enviá el stock vacío o negativo, el nombre vacío o un precio negativo.</p>
 
     <!-- novalidate permite enviar datos inválidos para probar el backend. -->
     <form id="formulario" novalidate>
@@ -39,10 +40,13 @@
         <label for="precio">Precio:</label>
         <input id="precio" type="number" step="any">
 
+        <label for="stock">Stock:</label>
+        <input id="stock" type="number" min="0" step="1">
+
         <button type="submit">Enviar producto</button>
     </form>
 
-    <h2>3. Observar la comunicación</h2>
+    <h2>3. Qué enviamos y qué responde el servidor</h2>
     <div aria-live="polite">
         <p id="estado">Todavía no se envió ninguna petición.</p>
 
